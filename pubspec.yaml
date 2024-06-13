@@ -11,25 +11,29 @@ dependencies:
   auto_route: ">=7.8.0 <7.8.5"
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   dio: ^5.0.0
   go_router: ^13.1.0
   flutter_riverpod: ^2.4.0
   freezed_annotation: ^2.3.3
-  json_serializable:
+  json_serializable: null
   flutter_dotenv: ^5.0.2
   url_launcher: ^6.1.10
   webview_flutter: ^4.5.0
   cupertino_icons: ^1.0.2
+  intl: ^0.18.0
 
 dev_dependencies:
   auto_route_generator: ^7.1.1
-  build_runner:
-  freezed:
-  
+  build_runner: null
+  freezed: null
+
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^3.0.1
+  intl_generator: ^0.4.1
 
 flutter:
 
@@ -39,3 +43,5 @@ flutter:
     - family: NotoSansKR
       fonts:
         - asset: fonts/noto_sans_kr/NotoSansKR-Regular.ttf
+flutter_intl:
+  enabled: true

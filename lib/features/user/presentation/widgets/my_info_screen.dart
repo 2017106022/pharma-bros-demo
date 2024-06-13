@@ -19,35 +19,7 @@ class MyInfoScreen extends ConsumerWidget {
     final bottomNavBarItem = ref.watch(bottomNavBarProvider);
     
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: BottomNavBarItem.values.indexOf(bottomNavBarItem),
-        onTap: (index) {
-        final selectedItem = BottomNavBarItem.values[index];
-        ref.read(bottomNavBarProvider.notifier).state = selectedItem;
 
-        debugPrint('🍔 ${selectedItem.toString()}');
-
-        switch (selectedItem) {
-          case BottomNavBarItem.home:
-            AutoRouter.of(context).replace(const SearchProductRoute());
-            break;
-          case BottomNavBarItem.myInfo:
-            AutoRouter.of(context).replace(const MyInfoRoute());
-            break;
-        }
-      },
-        items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Home',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.person),
-          label: 'My Info',
-        ),
-      ],
-      
-      ),
     );
   }
 }

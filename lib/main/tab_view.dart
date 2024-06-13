@@ -5,9 +5,10 @@ import 'package:pharma_bros_demo/features/user/presentation/widgets/my_info_scre
 
 import '../../../../routes/app_route.dart';
 import '../../../../shared/domain/providers/bottom_nav_bar_provider.dart';
+import '../features/products/presentation/screens/search_product_screen.dart';
 
 /// {@category Screen}
-/// 홈 화면 (제품 검색 화면)
+/// 메인 화면 (탭뷰)
 @RoutePage()
 class TabViewScreen extends ConsumerWidget {
   static const routeName = '/tabViewScreen';
@@ -16,25 +17,15 @@ class TabViewScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final bottomNavBarItem = ref.watch(bottomNavBarProvider);
+    final _bottomNavBarItem = ref.watch(bottomNavBarProvider);
+    final _selectedIndex = BottomNavBarItem.values.indexOf(_bottomNavBarItem);
 
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: BottomNavBarItem.values.indexOf(bottomNavBarItem),
+        currentIndex: _selectedIndex,
         onTap: (index) {
           final selectedItem = BottomNavBarItem.values[index];
           ref.read(bottomNavBarProvider.notifier).state = selectedItem;
-
-          debugPrint('🍔 ${selectedItem.toString()}');
-
-          switch (selectedItem) {
-            case BottomNavBarItem.home:
-              AutoRouter.of(context).replace(const SearchProductRoute());
-              break;
-            case BottomNavBarItem.myInfo:
-              AutoRouter.of(context).replace(const MyInfoRoute());
-              break;
-          }
         },
         items: const [
           BottomNavigationBarItem(
@@ -47,8 +38,10 @@ class TabViewScreen extends ConsumerWidget {
           ),
         ],
       ),
-      body: const SafeArea(
-          child: TabBarView(physics: const NeverScrollableScrollPhysics(), children: [SearchProductScreen(), MyInfoScreen()])),
+      body: SafeArea(
+          child: IndexedStack(
+              index: _selectedIndex,
+              children: [const SearchProductScreen(), const MyInfoScreen()])),
     );
   }
 }
